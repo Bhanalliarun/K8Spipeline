@@ -15,14 +15,14 @@ node {
        }
     }      
     stage('Build Docker Image'){
-        sh 'docker build -t bhanalliarun/my-doc:2.0.0 .'
+        sh 'docker build -t bhanalliarun/my-kube:2.0.0 .'
     }
     stage('Push Docker Image'){
         withCredentials([string(credentialsId: 'dockerpwd', variable: 'docker')])
         {
         sh "docker login -u bhanalliarun -p ${docker}"
         }
-        sh 'docker push bhanalliarun/my-doc:2.0.0'
+        sh 'docker push bhanalliarun/my-kube:2.0.0'
     }
  
     stage("Deploy app in k8s cluster"){
